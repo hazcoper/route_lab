@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RouteLab · GPS trip explorer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="./static/style.css?v=7">
+</head><body>
+<header class="topbar"><div class="brand"><div class="brandmark">⌁</div><div>route<span>lab</span><small>GPS TRIP EXPLORER</small></div></div><div class="header-right"><span class="online"><span class="dot"></span> FAMILY TRIP DASHBOARD</span><button id="newTrip" class="outline hidden">↻ Reload trip</button></div></header>
+<main>
+<section id="uploadScreen" class="upload-screen"><div class="eyebrow">FROM YOUR ESP32 TO THE MAP</div><h1>Every journey<br>has a <em>story.</em></h1><p class="hero-sub">The latest published GPS journey loads automatically. Explore the route, speed and trip statistics.</p>
+<div id="dropZone" class="drop-zone" tabindex="0" role="button" aria-label="Choose GPS binary file"><div class="upload-icon">⇧</div><h2>Loading published trip…</h2><p>Your trip data is bundled with this website</p><small>Published GPS positions · No upload required</small><input type="file" id="fileInput" accept=".bin,application/octet-stream" hidden></div><div class="error" id="errorBox" role="alert"></div><div class="features"><span>◉ Interactive route map</span><span>↗ Speed & distance analytics</span><span>▤ CSV · GPX · KML export</span></div></section>
+<section id="dashboard" class="dashboard hidden">
+<div class="dash-heading"><div><div class="eyebrow">YOUR JOURNEY AT A GLANCE</div><h1>Trip overview</h1><div id="tripDates" class="muted">—</div></div><div class="export-buttons"><a id="exportCSV" download class="outline">↓ CSV</a><a id="exportGPX" download class="outline">↓ GPX</a><a id="exportKML" download class="outline">↓ KML</a></div></div>
+<div class="stats" id="stats"></div>
+<div id="notice" class="notice hidden"></div>
+<div class="panel map-panel"><div class="panel-heading"><div><h2>Journey map</h2><p>GPS route · Color represents recorded speed</p></div><button class="outline small" id="fitMap">◎ Fit route</button></div><div id="map"></div><div class="legend"><span>Speed</span><span class="lg-dot" style="background:#1768FF"></span>Slow <div class="gradient"></div> Fast <span class="lg-dot" style="background:#FA4356"></span><span class="legend-note">Broken segments indicate gaps</span></div></div>
+<div class="chart-controls"><div><strong>Linked time charts</strong><span> Drag to zoom · Scroll to zoom · Hover to locate a sample on the map</span></div><button id="resetZoom" class="outline small">Reset time zoom</button></div>
+<div class="charts-grid"><div class="panel"><div class="panel-heading"><div><h2>Speed over time</h2><p>Instantaneous GNSS-reported speed · km/h</p></div></div><div class="canvas-wrap"><canvas id="speedChart"></canvas></div></div><div class="panel"><div class="panel-heading"><div><h2>Satellite reception</h2><p>Satellites tracked at each recording</p></div></div><div class="canvas-wrap"><canvas id="satChart"></canvas></div></div><div class="panel"><div class="panel-heading"><div><h2>Distance over time</h2><p>Cumulative straight-line distance across connected samples</p></div></div><div class="canvas-wrap"><canvas id="distanceChart"></canvas></div></div><div class="panel"><div class="panel-heading"><div><h2>Fix quality</h2><p>Distribution of reported GNSS fix types</p></div></div><div class="canvas-wrap doughnut"><canvas id="fixChart"></canvas></div></div></div>
+<div class="panel"><div class="panel-heading"><div><h2>Recording details</h2><p>Sampling coverage and measurement caveats</p></div></div><div class="details" id="details"></div></div>
+<footer>ROUTELAB · ESP32-S3 GPS LOGGER · Published static website · Hosted on GitHub Pages</footer>
+</section></main>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.2.0/dist/chartjs-plugin-zoom.min.js"></script>
+<script src="./static/app.js?v=7"></script></body></html>
